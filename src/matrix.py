@@ -1,4 +1,5 @@
 #   Membuat dan Menampilkan Matriks
+import numpy as np
 
 def buatMatrix (Rows, Cols):
     mat = [[0 for j in range(Cols)] for i in range(Rows)]
@@ -76,4 +77,45 @@ def transposeMatrix (mat):
     for i in range(0, row, 1):
        for j in range(0, col, 1):
            ret[i][j] = mat[j][i]
+    return (ret)
+
+def konstantaMatrix (mat, k):
+    row = len(mat)
+    col = len(mat[0])
+    ret = buatMatrix(row, col)
+    
+    for i in range(0, row, 1):
+       for j in range(0, col, 1):
+           ret[i][j] = mat[i][j]*k
+    return (ret)
+
+def kofaktorMatrix (mat, x, y):
+    row = len(mat)
+    col = len(mat[0])
+    ret = buatMatrix(row-1, col-1)
+    
+    for i in range(0, row, 1):
+        for j in range(0, col, 1):
+            if (i != x and j != y):
+                if (i < x and j < y):
+                    ret[i][j] = mat[i][j]
+                elif (i < x and j > y):
+                    ret[i][j-1] = mat[i][j]
+                elif (i > x and j < y):
+                    ret[i-1][j] = mat[i][j]
+                else:
+                    ret[i-1][j-1] = mat[i][j]
+    return (ret)
+
+def determinanMatrix (mat):
+    row = len(mat)
+    col = len(mat[0])
+    ret = 0
+    
+    if (row == col):
+        if (row == 2):
+            ret = (mat[0][0]*mat[1][1]) - (mat[0][1]*mat[1][0])
+        else:
+            for i in range(0, row, 1):
+                ret = ret + (mat[0][i] * determinanMatrix(kofaktorMatrix(mat, 0, i)))
     return (ret)
