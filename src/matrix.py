@@ -119,3 +119,18 @@ def determinanMatrix (mat):
             for i in range(0, row, 1):
                 ret = ret + (mat[0][i] * determinanMatrix(kofaktorMatrix(mat, 0, i)))
     return (ret)
+
+def flattenMatrix(mat):
+# Function to flatten image matrix of n x n to n^2 x 1 (not 1 x n^2)
+# Input is a two-dimensional array of n row and n column size
+# Input of [[0,5,10,15,20], becomes [ 0, 1, 2, 3, 4,
+#           [1,6,11,16,21],           5, 6, 7, 8, 9,
+#           [2,7,12,17,22],          10,11,12,13,14,
+#           [3,8,13,18,23],          15,16,17,18,19,
+#           [4,9,14,19,24]]          20,21,22,23,24 ]
+    flat_arr = [0] * (len(mat) * len(mat))
+    a = 0
+    for j in range (0, len(mat)):
+        for i in range(0, len(mat)):
+            flat_arr[a] = mat[i][j]
+            a += 1
