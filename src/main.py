@@ -55,19 +55,16 @@ S = np.array(load_images_folder("./dataset"))
 # print(euclidean)
     
 
-# # Q = euclidean_distance(eigenfaces, eigenfacestes)
-# # print(S)
-# print(S.shape)
-# # # # print(mean)
-# # print(mean.shape)
-# # # # print(sel)
-# # # print(sel.shape)
-# # # print(cov.shape)
-# # # print(vektoreigen.shape)
-# # print(eigenfaces.shape)
-
-# # print(TestFace.shape)
-# # print(selisihface.shape)
-# print(eigenfacestes.shape)
-
-# print(jarak.shape)
+S = np.array(load_images_folder(".\dataset"))
+mean = np.mean(S, axis=0) # Calculate mean of images
+sel = np.array(abs(S - mean))# Calculate difference between images and mean
+trans = np.transpose(sel)
+cov = np.array(np.matmul(sel, trans))# Calculate covariance of difference
+vektoreigen = np.array(vektor_eigen(cov)) # Calculate eigen vector of covariance
+vektoreigen = np.dot(vektoreigen, sel)
+eigenfaces = np.array(np.dot(sel, vektoreigen)) # Calculate eigen face
+# TEST(Inputan)
+tes = '.\dataset\Alexandra Daddario.jpg'
+TestFace = np.array(load_images_file(tes))
+selisihface = np.array(abs(TestFace - mean))
+print(S)
