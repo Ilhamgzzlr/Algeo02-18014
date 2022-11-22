@@ -2,49 +2,47 @@ import numpy as np
 import sympy as sy
 from matrix import*
 
+
+def Normalize(mat):
+    mat = np.square(mat)
+    mat = np.sum(mat)
+    mat = np.sqrt(mat)
+    return mat
+
+
 def QR(mat):
-    n, m = mat.shape # get the shape of A
+    n, m = mat.shape                        # n = baris, m = kolom
 
-    Q = np.empty((n, n)) # initialize matrix Q
-    u = np.empty((n, n)) # initialize matrix u
+    x = np.empty((n, n))                    # inisialisasi matriks x
+    y = np.empty((n, n))                    # inisialisasi matriks y
 
-    u[:, 0] = mat[:, 0]
-    Q[:, 0] = u[:, 0] / np.linalg.norm(u[:, 0])
+    y[:, 0] = mat[:, 0]                     # y0 = a0
+    x[:, 0] = y[:, 0] / Normalize(y[:, 0])  # x1 = u1 / ||u1||
 
     for i in range(1, n):
-        u[:, i] = mat[:, i]
+        y[:, i] = mat[:, i]                 # yi = ai
         for j in range(i):
-            u[:, i] -= (mat[:, i] @ Q[:, j]) * Q[:, j] # get each u vector
+            y[:, i] -= (mat[:, i] @ x[:, j]) * x[:, j]  # yi = ai - (ai . xj) xj
 
-        Q[:, i] = u[:, i] / np.linalg.norm(u[:, i]) # compute each e vetor
+        x[:, i] = y[:, i] / Normalize(y[:, i])          # xi = yi / ||yi||
 
-    R = np.zeros((n, m))
+    z = np.zeros((n, m))                                # inisialisasi matriks z
     for i in range(n):
         for j in range(i, m):
-            R[i, j] = mat[:, j] @ Q[:, i]
+            z[i, j] = mat[:, j] @ x[:, i]               # compute each e value
 
-    return Q, R
-
-
-
-def eigen_Val(mat):
-    pQ = np.eye(mat.shape[0])
-    X = np.copy(mat)
-    for i in range(1000):
-        Q, R = QR(X)
-        pQ = pQ @ Q
-        X = R @ Q
-    return np.diag(X)
+    return x, z                                         # return x and z
 
 def eigen_Vec(mat):
-    pQ = np.eye(mat.shape[0])
-    X = np.copy(mat)
-    for i in range(1000):
-        Q, R = QR(X)
-        pQ = pQ @ Q
-        X = R @ Q
-    return pQ
-
+    X = np.eye(mat.shape[0])
+    Y = np.copy(mat)
+    
+    for i in range(10):
+        W, Z = QR(Y)
+        X = X @ W
+        Y = Z @ W
+        
+    return X
 
 
 
