@@ -1,6 +1,4 @@
 import numpy as np
-import sympy as sy
-from matrix import*
 
 
 def Normalize(mat):
@@ -12,10 +10,8 @@ def Normalize(mat):
 
 def QR(mat):
     n, m = mat.shape                        # n = baris, m = kolom
-
     x = np.empty((n, n))                    # inisialisasi matriks x
     y = np.empty((n, n))                    # inisialisasi matriks y
-
     y[:, 0] = mat[:, 0]                     # y0 = a0
     x[:, 0] = y[:, 0] / Normalize(y[:, 0])  # x1 = u1 / ||u1||
 
