@@ -8,7 +8,7 @@ import timeit
 
 frame = tkinter.Tk()
 frame.geometry("1067x600")
-frame.title("FACE RECOGNITION")
+frame.title("Pengenalan Wajah")
 gambar = tkinter.PhotoImage(file = "Frame.png", master = frame)
 gambar_label = tkinter.Label(frame, image = gambar)
 gambar_label.place(x = 0, y = 0)
@@ -69,7 +69,7 @@ def pilih_picture():
                     panel.place(x=727, y=200) 
                     execute_TIME()  
         else:
-            showinfo("Result", "Not Found")                             # If minimum euclidean distance > 0.5
+            showinfo("Hasil", "Coba Lagi")                             # If minimum euclidean distance > 0.5
 
 def pilih_folder():
     global mean
@@ -94,7 +94,7 @@ def pilih_folder():
 
         eigen_face = np.array(np.dot(vektor_eigen.T, selisih))      
         weight = np.array(np.dot(eigen_face, selisih.T))
-        showinfo("Folder Selected", dipilih)                            # Show folder selected
+        showinfo("Berhasil", dipilih)                            # Show folder selected
 
 tekan1 = tkinter.Button(frame, text = "Choose Dataset", font=("Times New Roman", 12), command = pilih_folder )
 tekan1.place(x = 46, y = 235, relx = 0.01, rely = 0.01)

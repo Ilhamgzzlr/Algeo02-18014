@@ -13,7 +13,7 @@ def QR(mat):
     x = np.empty((n, n))                    # inisialisasi matriks x
     y = np.empty((n, n))                    # inisialisasi matriks y
     y[:, 0] = mat[:, 0]                     # y0 = a0
-    x[:, 0] = y[:, 0] / Normalize(y[:, 0])  # x1 = u1 / ||u1||
+    x[:, 0] = y[:, 0] / Normalize(y[:, 0])  
 
     for i in range(1, n):
         y[:, i] = mat[:, i]                 # yi = ai
