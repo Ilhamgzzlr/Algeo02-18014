@@ -17,4 +17,4 @@ link laporan :
 - Figma 
 
 ## Setup
-install this repository and then run file gui.py
+install this repository and then run file GUI.py
