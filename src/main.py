@@ -53,22 +53,6 @@ S = np.array(load_images_folder("./dataset"))
 #             capex = i
 # print(capex)
 # print(euclidean)
-    
-
-S = np.array(load_images_folder(".\dataset"))
-mean = np.mean(S, axis=0) # Calculate mean of images
-sel = np.array(abs(S - mean))# Calculate difference between images and mean
-trans = np.transpose(sel)
-cov = np.array(np.matmul(sel, trans))# Calculate covariance of difference
-vektoreigen = np.array(vektor_eigen(cov)) # Calculate eigen vector of covariance
-vektoreigen = np.dot(vektoreigen, sel)
-eigenfaces = np.array(np.dot(sel, vektoreigen)) # Calculate eigen face
-# TEST(Inputan)
-tes = '.\dataset\Alexandra Daddario.jpg'
-TestFace = np.array(load_images_file(tes))
-selisihface = np.array(abs(TestFace - mean))
-print(S)
-
 
 
 S = np.array(load_images_folder(".\dataset"))
@@ -76,8 +60,7 @@ mean = np.mean(S, axis=0)  # Calculate mean of images
 sel = np.array(abs(S - mean))  # Calculate difference between images and mean
 trans = np.transpose(sel)
 cov = np.array(np.matmul(sel, trans))  # Calculate covariance of difference
-# Calculate eigen vector of covariance
-vektoreigen = np.array(vektor_eigen(cov))
+vektoreigen = np.array(eigen_Vec(cov))  # Calculate eigen vector of covariance
 vektoreigen = np.dot(vektoreigen, sel)
 eigenfaces = np.array(np.dot(sel, vektoreigen))  # Calculate eigen face
 # TEST(Inputan)
@@ -86,9 +69,12 @@ TestFace = np.array(load_images_file(tes))
 selisihface = np.array(abs(TestFace - mean))
 print(S)
 # Euclidean Distance
-database = np.array(load_images_folder(".\dataset"))
-minimumdiff = database[0]
-for image in database:
-    currentdiff = nilai_eigen(TestFace) - nilai_eigen(image)
+database = load_images_folder(".\dataset")
+minimumdiff = eigen_Val(database[0]) - eigen_Val(TestFace)
+minimumindex = 0
+for i in range(len(database)):
+    currentdiff = eigen_Val(database[i]) - eigen_Val(TestFace)
     if currentdiff <= minimumdiff:
         minimumdiff = currentdiff
+        minimumindex = i
+print(database[minimumindex])
