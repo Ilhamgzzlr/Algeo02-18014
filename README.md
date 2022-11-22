@@ -5,3 +5,16 @@
 1. Ilham Akbar                (13521068)
 2. Fazel Ginanda              (13521098)
 3. Ignatius David Partogi     (13518014)
+
+link laporan : 
+
+
+## General Information
+
+## Technologies Used
+- Vscode
+- Python 
+- Figma 
+
+## Setup
+install this repository and then run file GUI.py
