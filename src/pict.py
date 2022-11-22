@@ -5,8 +5,7 @@ import os
 from PIL import Image
 
 def euclidean_distance(X, Y):
-    return math.sqrt(((Y[0] - X[0]) * (Y[0] - X[0])) +\
-                    ((Y[1] - X[1]) * (Y[1] - X[1])))
+    return math.sqrt(((Y[0] - X[0]) * (Y[0] - X[0])) + ((Y[1] - X[1]) * (Y[1] - X[1])))
 
 def findBiggest(faces):
     biggest = (0,0,0,0)
